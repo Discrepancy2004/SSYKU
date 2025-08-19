@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
@@ -20,8 +22,96 @@ import {
 import Image from "next/image"
 import { Navbar } from "@/components/ui/navbar"
 import DarkVeil from "@/components/DarkVeil/DarkVeil"
+import { useState, useEffect } from "react"
+import { Carousel } from "@/components/ui/gallery"
 
 export default function HomePage() {
+  const galleryItems = [
+    {
+      image:
+        "/placeholder.svg?height=400&width=600&text=Operating Room Control Panel",
+      title: "Precision Control in Surgery",
+      description:
+        "Our surgeon control panels provide intuitive, sterile operation of OR lighting, HVAC, and imaging systems, allowing medical teams to focus entirely on patient care.",
+      link: "/panel",
+    },
+    {
+      image:
+        "/placeholder.svg?height=400&width=600&text=Medical Air Compressor System",
+      title: "Reliable Medical Air Systems",
+      description:
+        "Advanced compressor controllers ensure consistent pressure levels and energy-efficient operation for critical medical air and vacuum systems throughout your facility.",
+      link: "/products",
+    },
+    {
+      image:
+        "/placeholder.svg?height=400&width=600&text=Hospital Monitoring Dashboard",
+      title: "Real-Time System Monitoring",
+      description:
+        "Comprehensive monitoring solutions provide 24/7 oversight of all medical systems with predictive maintenance alerts and automated reporting capabilities.",
+      link: "/products",
+    },
+    {
+      image:
+        "/placeholder.svg?height=400&width=600&text=Medical Equipment Integration",
+      title: "Seamless System Integration",
+      description:
+        "Our integration services connect all your medical equipment into unified control systems, improving workflow efficiency and reducing operational complexity.",
+      link: "/contact",
+    },
+    {
+      image:
+        "/placeholder.svg?height=400&width=600&text=Operating Room Control Panel",
+      title: "Precision Control in Surgery",
+      description:
+        "Our surgeon control panels provide intuitive, sterile operation of OR lighting, HVAC, and imaging systems, allowing medical teams to focus entirely on patient care.",
+      link: "/contact",
+    },
+    {
+      image:
+        "/placeholder.svg?height=400&width=600&text=Operating Room Control Panel",
+      title: "Precision Control in Surgery",
+      description:
+        "Our surgeon control panels provide intuitive, sterile operation of OR lighting, HVAC, and imaging systems, allowing medical teams to focus entirely on patient care.",
+      link: "/contact",
+    },
+  ]
+  const slideData = [
+    {
+      title: "Mystic Mountains",
+      button: "Explore Component",
+      src: "https://images.unsplash.com/photo-1494806812796-244fe51b774d?q=80&w=3534&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      title: "Urban Dreams",
+      button: "Explore Component",
+      src: "https://images.unsplash.com/photo-1518710843675-2540dd79065c?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      title: "Neon Nights",
+      button: "Explore Component",
+      src: "https://images.unsplash.com/photo-1590041794748-2d8eb73a571c?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      title: "Desert Whispers",
+      button: "Explore Component",
+      src: "https://images.unsplash.com/photo-1679420437432-80cfbf88986c?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+  ]
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+
+  // Auto-rotate gallery every 5 seconds (pauses on hover)
+  useEffect(() => {
+    if (isPaused) return
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % galleryItems.length)
+    }, 3000)
+
+    return () => clearInterval(interval)
+  }, [galleryItems.length, isPaused])
+
   return (
     <div className='relative min-h-screen'>
       {/* DarkVeil Background */}
@@ -43,51 +133,100 @@ export default function HomePage() {
 
         <main className='flex-1'>
           {/* Hero Section */}
-          <section className='w-full py-12 md:py-24 lg:py-32'>
+          <section className='w-full py-8 md:py-12 lg:py-16'>
             <div className='container mx-auto px-4 md:px-6 max-w-7xl'>
-              <div className='grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]'>
-                <div className='flex flex-col justify-center space-y-4'>
-                  <div className='space-y-2'>
-                    <h1 className='text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-white drop-shadow-lg'>
-                      Advanced Medical Solutions for Modern Hospitals
-                    </h1>
-                    <p className='max-w-[600px] text-gray-200 md:text-xl drop-shadow-lg'>
-                      SSYKU Tech delivers cutting-edge medical technology
-                      including surgeon control panels, compressor controllers,
-                      and integrated hospital management systems.
-                    </p>
-                  </div>
-                  <div className='flex flex-col gap-2 min-[400px]:flex-row'>
-                    <Link href='/products'>
-                      <Button
-                        size='lg'
-                        className='bg-blue-600 hover:bg-blue-700 shadow-lg'
-                      >
-                        View Our Products
-                        <ArrowRight className='ml-2 h-4 w-4' />
-                      </Button>
-                    </Link>
-                    <Link href='/contact'>
-                      <Button
-                        variant='outline'
-                        size='lg'
-                        className='bg-white/20 text-white border-white hover:bg-white hover:text-gray-900 shadow-lg'
-                      >
-                        Get Consultation
-                      </Button>
-                    </Link>
-                  </div>
+              <div className='text-center space-y-6 mb-8'>
+                <h1 className='text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-white drop-shadow-xl max-w-5xl mx-auto leading-tight'>
+                  Advanced Medical Solutions for Modern Hospitals
+                </h1>
+                <div className='container mx-auto px-4 md:px-6 max-w-7xl'>
+                  <Card
+                    className='overflow-hidden border-2 shadow-xl bg-white/90 backdrop-blur-sm'
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                  >
+                    <div className='grid gap-0 lg:grid-cols-2'>
+                      <div className='relative h-48 md:h-64 lg:h-80'>
+                        <div className='relative w-full h-full'>
+                          {galleryItems.map((item, index) => (
+                            <Image
+                              key={index}
+                              src={item.image || "/placeholder.svg"}
+                              width='600'
+                              height='400'
+                              alt={item.title}
+                              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
+                                index === currentSlide
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                        {/* Slide indicators */}
+                        <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2'>
+                          {galleryItems.map((_, index) => (
+                            <button
+                              key={index}
+                              onClick={() => setCurrentSlide(index)}
+                              className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                                index === currentSlide
+                                  ? "bg-white"
+                                  : "bg-white/50"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                      <div className='p-6 md:p-8 lg:p-12 flex flex-col justify-center'>
+                        <div className='space-y-4'>
+                          <h3 className='text-2xl md:text-3xl font-bold text-gray-900 transition-all duration-700 ease-in-out'>
+                            {galleryItems[currentSlide].title}
+                          </h3>
+                          <p className='text-gray-600 md:text-lg leading-relaxed transition-all duration-700 ease-in-out'>
+                            {galleryItems[currentSlide].description}
+                          </p>
+
+                          <div className='flex flex-wrap gap-3 pt-4 justify-center'>
+                            <Link href={galleryItems[currentSlide].link}>
+                              <Button className='bg-blue-600 hover:bg-blue-700'>
+                                Learn More
+                                <ArrowRight className='ml-2 h-4 w-4' />
+                              </Button>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
                 </div>
-                <Image
-                  src='/placeholder.svg?height=400&width=600'
-                  width='600'
-                  height='400'
-                  alt='Medical Control Panel'
-                  className='mx-auto aspect-video overflow-hidden rounded-xl object-cover shadow-xl bg-white/10'
-                />
+                <div className='flex flex-col sm:flex-row gap-4 justify-center items-center pt-4'>
+                  <Link href='/products'>
+                    <Button
+                      size='lg'
+                      className='bg-blue-600 hover:bg-blue-700 shadow-lg text-lg px-8 py-6 w-full sm:w-auto'
+                    >
+                      View All Our Products
+                      <ArrowRight className='ml-2 h-5 w-5' />
+                    </Button>
+                  </Link>
+                  <Link href='/contact'>
+                    <Button
+                      variant='outline'
+                      size='lg'
+                      className='bg-white/60 text-gray-800 border-gray-300 hover:bg-white hover:text-gray-900 shadow-lg text-lg px-8 py-6 w-full sm:w-auto'
+                    >
+                      Get Consultation
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </section>
+
+          <div className='relative overflow-hidden w-full h-full py-20'>
+            <Carousel slides={slideData} />
+          </div>
 
           {/* Features Section */}
           <section className='w-full py-12 md:py-24 lg:py-32'>
@@ -301,55 +440,23 @@ export default function HomePage() {
               {/* Company Info */}
               <div className='space-y-3'>
                 <div className='flex items-center'>
-                  <div className='h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center'>
-                    <span className='text-white font-bold text-sm'>ST</span>
+                  <div className='h-8 w-8  rounded-lg flex items-center justify-center'>
+                    <Image
+                      src='/logo2.jpeg'
+                      alt='SSYKU Tech Logo'
+                      width={35}
+                      height={50}
+                      className='rounded-lg'
+                    />
                   </div>
                   <span className='ml-2 text-xl font-bold text-white'>
                     SSYKU Tech
                   </span>
                 </div>
                 <p className='text-sm text-gray-300'>
-                  Leading provider of advanced medical technology solutions for
+                  Leading provider of advanced medical technology products for
                   modern healthcare facilities worldwide.
                 </p>
-                <div className='flex space-x-4'>
-                  <Link
-                    href='#'
-                    className='text-gray-400 hover:text-blue-400 transition-colors'
-                  >
-                    <svg
-                      className='h-5 w-5'
-                      fill='currentColor'
-                      viewBox='0 0 24 24'
-                    >
-                      <path d='M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z' />
-                    </svg>
-                  </Link>
-                  <Link
-                    href='#'
-                    className='text-gray-400 hover:text-blue-400 transition-colors'
-                  >
-                    <svg
-                      className='h-5 w-5'
-                      fill='currentColor'
-                      viewBox='0 0 24 24'
-                    >
-                      <path d='M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z' />
-                    </svg>
-                  </Link>
-                  <Link
-                    href='#'
-                    className='text-gray-400 hover:text-blue-400 transition-colors'
-                  >
-                    <svg
-                      className='h-5 w-5'
-                      fill='currentColor'
-                      viewBox='0 0 24 24'
-                    >
-                      <path d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z' />
-                    </svg>
-                  </Link>
-                </div>
               </div>
 
               {/* Quick Links */}
@@ -390,14 +497,6 @@ export default function HomePage() {
                       Contact
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      href='#'
-                      className='text-sm text-gray-300 hover:text-blue-400 transition-colors'
-                    >
-                      Support
-                    </Link>
-                  </li>
                 </ul>
               </div>
 
@@ -410,7 +509,7 @@ export default function HomePage() {
                       href='/products'
                       className='text-sm text-gray-300 hover:text-blue-400 transition-colors'
                     >
-                      Surgeon Control Panels
+                      Surgeon Control Panel
                     </Link>
                   </li>
                   <li>
@@ -418,7 +517,7 @@ export default function HomePage() {
                       href='/products'
                       className='text-sm text-gray-300 hover:text-blue-400 transition-colors'
                     >
-                      Compressor Controllers
+                      Smart Medical Gas Area Alarm
                     </Link>
                   </li>
                   <li>
@@ -426,7 +525,7 @@ export default function HomePage() {
                       href='/products'
                       className='text-sm text-gray-300 hover:text-blue-400 transition-colors'
                     >
-                      Monitoring Systems
+                      Dew Point Monitor
                     </Link>
                   </li>
                   <li>
@@ -434,7 +533,7 @@ export default function HomePage() {
                       href='/products'
                       className='text-sm text-gray-300 hover:text-blue-400 transition-colors'
                     >
-                      Safety Control Systems
+                      Auto Change Over Unit
                     </Link>
                   </li>
                   <li>
@@ -442,7 +541,15 @@ export default function HomePage() {
                       href='/products'
                       className='text-sm text-gray-300 hover:text-blue-400 transition-colors'
                     >
-                      Integration Services
+                      IAQ
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href='/products'
+                      className='text-sm text-gray-300 hover:text-blue-400 transition-colors'
+                    >
+                      Mass Flow Monitor
                     </Link>
                   </li>
                 </ul>
@@ -457,19 +564,20 @@ export default function HomePage() {
                   <div className='flex items-center space-x-2'>
                     <Phone className='h-4 w-4 text-blue-400' />
                     <span className='text-sm text-gray-300'>
-                      +1 (800) 779-5883
+                      +91 9740961400
                     </span>
                   </div>
                   <div className='flex items-center space-x-2'>
                     <Mail className='h-4 w-4 text-blue-400' />
                     <span className='text-sm text-gray-300'>
-                      info@ssykutech.com
+                      sales@ssykutech.in
                     </span>
                   </div>
                   <div className='flex items-center space-x-2'>
                     <MapPin className='h-4 w-4 text-blue-400' />
                     <span className='text-sm text-gray-300'>
-                      Healthcare City, HC 12345
+                      Sri Sivam YKU Tech pvt Ltd No.14/20, Arumugam street, 1 st
+                      Floor,Puzhuthivakkam, Madipkkam,Chennai -600091
                     </span>
                   </div>
                 </div>

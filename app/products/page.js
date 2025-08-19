@@ -1,7 +1,9 @@
 "use client"
 
 import Link from "next/link"
+import { Spotlight } from "@/components/ui/spotlight"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import {
   Card,
   CardContent,
@@ -51,25 +53,32 @@ export default function ProductsPage() {
       {/* Content */}
       <div className='relative z-10 flex flex-col min-h-screen'>
         <Navbar activePage='products' />
+        <div className='relative flex h-[40rem] w-full overflow-hidden rounded-md bg-black/[0.96] antialiased md:items-center md:justify-center'>
+          <div
+            className={cn(
+              "pointer-events-none absolute inset-0 [background-size:40px_40px] select-none",
+              "[background-image:linear-gradient(to_right,#171717_1px,transparent_1px),linear-gradient(to_bottom,#171717_1px,transparent_1px)]"
+            )}
+          />
+
+          <Spotlight
+            className='-top-40 left-0 md:-top-20 md:left-60'
+            fill='white'
+          />
+          <div className='relative z-10 mx-auto w-full max-w-7xl p-4 pt-20 md:pt-0'>
+            <h1 className='bg-opacity-50 bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text text-center text-4xl font-bold text-transparent md:text-7xl'>
+              Medical Technology Products
+            </h1>
+            <p className='mx-auto mt-4 max-w-lg text-center text-base font-normal text-neutral-300'>
+              Comprehensive medical solutions designed to enhance hospital
+              operations, improve patient care, and support medical
+              professionals with cutting-edge technology.
+            </p>
+          </div>
+        </div>
 
         <main className='flex-1'>
           {/* Hero Section */}
-          <section className='w-full py-12 md:py-24 lg:py-32'>
-            <div className='container mx-auto px-4 md:px-6 max-w-7xl'>
-              <div className='flex flex-col items-center justify-center space-y-4 text-center'>
-                <div className='space-y-2'>
-                  <h1 className='text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-black drop-shadow-xl'>
-                    Medical Technology Products
-                  </h1>
-                  <p className='max-w-[900px] text-black md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed font-medium'>
-                    Comprehensive medical solutions designed to enhance hospital
-                    operations, improve patient care, and support medical
-                    professionals with cutting-edge technology.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
 
           {/* Featured Products */}
           <section className='w-full py-12 md:py-24 lg:py-32'>
@@ -145,9 +154,9 @@ export default function ProductsPage() {
                           </div>
                         </div>
                         <div className='mt-6'>
-                          <Link href='/contact'>
+                          <Link href='/panel'>
                             <Button className='bg-blue-600 hover:bg-blue-700 shadow-lg'>
-                              Request Quote
+                              More Info
                             </Button>
                           </Link>
                         </div>
@@ -166,6 +175,362 @@ export default function ProductsPage() {
                 </Card>
 
                 {/* Compressor Controllers */}
+                <Card className='overflow-hidden border-2 bg-black/80 shadow-lg'>
+                  <div className='grid gap-6 lg:grid-cols-2'>
+                    <div className='relative lg:order-first h-full'>
+                      <Image
+                        src='/placeholder.svg?height=400&width=600'
+                        width='600'
+                        height='400'
+                        alt='Compressor Controller'
+                        className='w-full h-full object-cover bg-white/10'
+                      />
+                    </div>
+                    <div className='p-6 lg:p-8'>
+                      <div className='flex items-center gap-2 mb-4'>
+                        <Settings className='h-6 w-6 text-blue-400' />
+                        <Badge
+                          variant='secondary'
+                          className='bg-blue-600/20 text-blue-200 border-blue-400/30'
+                        >
+                          Popular Choice
+                        </Badge>
+                      </div>
+                      <CardHeader className='p-0'>
+                        <CardTitle className='text-2xl lg:text-3xl text-white'>
+                          Compressor Controllers
+                        </CardTitle>
+                        <CardDescription className='text-lg text-gray-200'>
+                          Intelligent medical air and vacuum system controllers
+                          that ensure optimal pressure levels and
+                          energy-efficient operation throughout your facility.
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className='p-0 mt-6'>
+                        <div className='grid gap-4 sm:grid-cols-2'>
+                          <div className='space-y-3'>
+                            <h4 className='font-semibold text-white'>
+                              Key Features:
+                            </h4>
+                            <ul className='space-y-2'>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Automated pressure control
+                                </span>
+                              </li>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Energy optimization algorithms
+                                </span>
+                              </li>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Remote monitoring capability
+                                </span>
+                              </li>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Predictive maintenance alerts
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                          <div className='space-y-3'>
+                            <h4 className='font-semibold text-white'>
+                              Applications:
+                            </h4>
+                            <ul className='space-y-2 text-sm text-gray-300'>
+                              <li>• Medical air systems</li>
+                              <li>• Vacuum systems</li>
+                              <li>• Nitrogen generators</li>
+                              <li>• Oxygen concentrators</li>
+                              <li>• Waste anesthetic gas disposal</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div className='mt-6'>
+                          <Link href='/contact'>
+                            <Button className='bg-blue-600 hover:bg-blue-700 shadow-lg'>
+                              Get Information
+                            </Button>
+                          </Link>
+                        </div>
+                      </CardContent>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className='overflow-hidden border-2 bg-black/80 shadow-lg'>
+                  <div className='grid gap-6 lg:grid-cols-2'>
+                    <div className='p-6 lg:p-8'>
+                      <div className='flex items-center gap-2 mb-4'>
+                        <Monitor className='h-6 w-6 text-blue-400' />
+                        <Badge
+                          variant='secondary'
+                          className='bg-blue-600/20 text-blue-200 border-blue-400/30'
+                        >
+                          Featured Product
+                        </Badge>
+                      </div>
+                      <CardHeader className='p-0'>
+                        <CardTitle className='text-2xl lg:text-3xl text-white'>
+                          Surgeon Control Panels
+                        </CardTitle>
+                        <CardDescription className='text-lg text-gray-200'>
+                          Advanced touchscreen control systems designed
+                          specifically for operating rooms with sterile
+                          operation capabilities and intuitive interfaces.
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className='p-0 mt-6'>
+                        <div className='grid gap-4 sm:grid-cols-2'>
+                          <div className='space-y-3'>
+                            <h4 className='font-semibold text-white'>
+                              Key Features:
+                            </h4>
+                            <ul className='space-y-2'>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Sterile touchscreen operation
+                                </span>
+                              </li>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Real-time vital monitoring
+                                </span>
+                              </li>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Emergency protocol integration
+                                </span>
+                              </li>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Customizable interface layouts
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                          <div className='space-y-3'>
+                            <h4 className='font-semibold text-white'>
+                              Specifications:
+                            </h4>
+                            <ul className='space-y-2 text-sm text-gray-300'>
+                              <li>• 15" - 24" display options</li>
+                              <li>• IP65 waterproof rating</li>
+                              <li>• 24/7 operation capability</li>
+                              <li>• Multi-language support</li>
+                              <li>• FDA approved components</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div className='mt-6'>
+                          <Link href='/panel'>
+                            <Button className='bg-blue-600 hover:bg-blue-700 shadow-lg'>
+                              More Info
+                            </Button>
+                          </Link>
+                        </div>
+                      </CardContent>
+                    </div>
+                    <div className='relative h-full'>
+                      <Image
+                        src='/placeholder.svg?height=400&width=600'
+                        width='600'
+                        height='400'
+                        alt='Surgeon Control Panel'
+                        className='w-full h-full object-cover bg-white/10'
+                      />
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className='overflow-hidden border-2 bg-black/80 shadow-lg'>
+                  <div className='grid gap-6 lg:grid-cols-2'>
+                    <div className='relative lg:order-first h-full'>
+                      <Image
+                        src='/placeholder.svg?height=400&width=600'
+                        width='600'
+                        height='400'
+                        alt='Compressor Controller'
+                        className='w-full h-full object-cover bg-white/10'
+                      />
+                    </div>
+                    <div className='p-6 lg:p-8'>
+                      <div className='flex items-center gap-2 mb-4'>
+                        <Settings className='h-6 w-6 text-blue-400' />
+                        <Badge
+                          variant='secondary'
+                          className='bg-blue-600/20 text-blue-200 border-blue-400/30'
+                        >
+                          Popular Choice
+                        </Badge>
+                      </div>
+                      <CardHeader className='p-0'>
+                        <CardTitle className='text-2xl lg:text-3xl text-white'>
+                          Compressor Controllers
+                        </CardTitle>
+                        <CardDescription className='text-lg text-gray-200'>
+                          Intelligent medical air and vacuum system controllers
+                          that ensure optimal pressure levels and
+                          energy-efficient operation throughout your facility.
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className='p-0 mt-6'>
+                        <div className='grid gap-4 sm:grid-cols-2'>
+                          <div className='space-y-3'>
+                            <h4 className='font-semibold text-white'>
+                              Key Features:
+                            </h4>
+                            <ul className='space-y-2'>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Automated pressure control
+                                </span>
+                              </li>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Energy optimization algorithms
+                                </span>
+                              </li>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Remote monitoring capability
+                                </span>
+                              </li>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Predictive maintenance alerts
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                          <div className='space-y-3'>
+                            <h4 className='font-semibold text-white'>
+                              Applications:
+                            </h4>
+                            <ul className='space-y-2 text-sm text-gray-300'>
+                              <li>• Medical air systems</li>
+                              <li>• Vacuum systems</li>
+                              <li>• Nitrogen generators</li>
+                              <li>• Oxygen concentrators</li>
+                              <li>• Waste anesthetic gas disposal</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div className='mt-6'>
+                          <Link href='/contact'>
+                            <Button className='bg-blue-600 hover:bg-blue-700 shadow-lg'>
+                              Get Information
+                            </Button>
+                          </Link>
+                        </div>
+                      </CardContent>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className='overflow-hidden border-2 bg-black/80 shadow-lg'>
+                  <div className='grid gap-6 lg:grid-cols-2'>
+                    <div className='p-6 lg:p-8'>
+                      <div className='flex items-center gap-2 mb-4'>
+                        <Monitor className='h-6 w-6 text-blue-400' />
+                        <Badge
+                          variant='secondary'
+                          className='bg-blue-600/20 text-blue-200 border-blue-400/30'
+                        >
+                          Featured Product
+                        </Badge>
+                      </div>
+                      <CardHeader className='p-0'>
+                        <CardTitle className='text-2xl lg:text-3xl text-white'>
+                          Surgeon Control Panels
+                        </CardTitle>
+                        <CardDescription className='text-lg text-gray-200'>
+                          Advanced touchscreen control systems designed
+                          specifically for operating rooms with sterile
+                          operation capabilities and intuitive interfaces.
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className='p-0 mt-6'>
+                        <div className='grid gap-4 sm:grid-cols-2'>
+                          <div className='space-y-3'>
+                            <h4 className='font-semibold text-white'>
+                              Key Features:
+                            </h4>
+                            <ul className='space-y-2'>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Sterile touchscreen operation
+                                </span>
+                              </li>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Real-time vital monitoring
+                                </span>
+                              </li>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Emergency protocol integration
+                                </span>
+                              </li>
+                              <li className='flex items-center'>
+                                <CheckCircle className='h-4 w-4 text-green-400 mr-2 flex-shrink-0' />
+                                <span className='text-sm text-gray-200'>
+                                  Customizable interface layouts
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                          <div className='space-y-3'>
+                            <h4 className='font-semibold text-white'>
+                              Specifications:
+                            </h4>
+                            <ul className='space-y-2 text-sm text-gray-300'>
+                              <li>• 15" - 24" display options</li>
+                              <li>• IP65 waterproof rating</li>
+                              <li>• 24/7 operation capability</li>
+                              <li>• Multi-language support</li>
+                              <li>• FDA approved components</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div className='mt-6'>
+                          <Link href='/panel'>
+                            <Button className='bg-blue-600 hover:bg-blue-700 shadow-lg'>
+                              More Info
+                            </Button>
+                          </Link>
+                        </div>
+                      </CardContent>
+                    </div>
+                    <div className='relative h-full'>
+                      <Image
+                        src='/placeholder.svg?height=400&width=600'
+                        width='600'
+                        height='400'
+                        alt='Surgeon Control Panel'
+                        className='w-full h-full object-cover bg-white/10'
+                      />
+                    </div>
+                  </div>
+                </Card>
+
                 <Card className='overflow-hidden border-2 bg-black/80 shadow-lg'>
                   <div className='grid gap-6 lg:grid-cols-2'>
                     <div className='relative lg:order-first h-full'>

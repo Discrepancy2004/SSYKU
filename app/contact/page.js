@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -50,11 +51,36 @@ export default function ContactPage() {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const router = useRouter()
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log("Form submitted:", formData)
-    alert("Thank you for your inquiry! We will contact you within 24 hours.")
+
+    try {
+      const response = await fetch("https://formspree.io/f/mnnzolzk", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        console.log("Form submitted:", formData)
+        setShowSuccessModal(true)
+
+        // Redirect after 2 seconds using Next.js router
+        setTimeout(() => {
+          router.push("/") // or router.push('/home')
+        }, 2000)
+      } else {
+        alert("There was an error submitting the form. Please try again.")
+      }
+    } catch (error) {
+      console.error("Error:", error)
+      alert("There was an error submitting the form. Please try again.")
+    }
   }
 
   return (
@@ -240,6 +266,39 @@ export default function ContactPage() {
                       Send Message
                     </Button>
                   </form>
+                  <div>
+                    {showSuccessModal && (
+                      <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+                        <div className='bg-white p-8 rounded-lg shadow-lg text-center max-w-md mx-4'>
+                          <div className='mb-4'>
+                            <svg
+                              className='w-16 h-16 text-green-500 mx-auto'
+                              fill='none'
+                              stroke='currentColor'
+                              viewBox='0 0 24 24'
+                            >
+                              <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                strokeWidth='2'
+                                d='M5 13l4 4L19 7'
+                              ></path>
+                            </svg>
+                          </div>
+                          <h2 className='text-2xl font-bold text-gray-800 mb-2'>
+                            Form Successfully Submitted!
+                          </h2>
+                          <p className='text-gray-600 mb-4'>
+                            Thank you for your inquiry! We will contact you
+                            within 24 hours.
+                          </p>
+                          <p className='text-sm text-gray-500'>
+                            Redirecting to home page...
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </CardContent>
               </Card>
 
